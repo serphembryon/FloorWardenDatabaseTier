@@ -172,6 +172,11 @@ namespace FloorWardenDatabaseTier.Models
                     .HasColumnName("Emergency_Type")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Icon)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
         }
     }
