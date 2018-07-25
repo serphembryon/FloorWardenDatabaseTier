@@ -44,7 +44,7 @@ namespace FloorWardenDatabaseTier.Controllers
         
         // POST: api/Employees
         [HttpPost]
-        public void Add(JSONEmployee postedEmployee)
+        public OkResult Add(JSONEmployee postedEmployee)
         {
             using (var context = new Ruby_EmergencyContext())
             {
@@ -62,6 +62,7 @@ namespace FloorWardenDatabaseTier.Controllers
                 context.Add(newEmployee);
                 context.SaveChangesAsync();
             }
+            return Ok();
         }
 
         // PUT: api/Employees/5
