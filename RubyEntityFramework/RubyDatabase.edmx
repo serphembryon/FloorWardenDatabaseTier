@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ruby_EmergencyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Ruby_Emergency.dbo.Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_Id" />
+            <PropertyRef Name="Fname" />
+            <PropertyRef Name="Lname" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="Room" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="Warden_Ind" />
+            <PropertyRef Name="Active_Ind" />
+          </Key>
+          <Property Name="Employee_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Building" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Room" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Warden_Ind" Type="int" Nullable="false" />
+          <Property Name="Active_Ind" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Employee_Status">
+          <Key>
+            <PropertyRef Name="Employee_Status_Id" />
+          </Key>
+          <Property Name="Employee_Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active_Ind" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Ruby_Emergency.dbo.Ref_Event_Type' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Ref_Event_Type">
+          <Key>
+            <PropertyRef Name="Event_Type_Id" />
+            <PropertyRef Name="Emergency_Type" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Active_Ind" />
+          </Key>
+          <Property Name="Event_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emergency_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active_Ind" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Ruby_EmergencyModelStoreContainer">
+          <EntitySet Name="Ref_Employee_Status" EntityType="Self.Ref_Employee_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Employee].[Employee_Id] AS [Employee_Id], 
+    [Employee].[Fname] AS [Fname], 
+    [Employee].[Lname] AS [Lname], 
+    [Employee].[Email] AS [Email], 
+    [Employee].[Building] AS [Building], 
+    [Employee].[Room] AS [Room], 
+    [Employee].[Phone] AS [Phone], 
+    [Employee].[Warden_Ind] AS [Warden_Ind], 
+    [Employee].[Active_Ind] AS [Active_Ind]
+    FROM [dbo].[Employee] AS [Employee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Ref_Event_Type" EntityType="Self.Ref_Event_Type" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ref_Event_Type].[Event_Type_Id] AS [Event_Type_Id], 
+    [Ref_Event_Type].[Emergency_Type] AS [Emergency_Type], 
+    [Ref_Event_Type].[Status] AS [Status], 
+    [Ref_Event_Type].[Active_Ind] AS [Active_Ind]
+    FROM [dbo].[Ref_Event_Type] AS [Ref_Event_Type]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ruby_EmergencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ref_Employee_Status">
+          <Key>
+            <PropertyRef Name="Employee_Status_Id" />
+          </Key>
+          <Property Name="Employee_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_Id" />
+            <PropertyRef Name="Fname" />
+            <PropertyRef Name="Lname" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="Room" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="Warden_Ind" />
+            <PropertyRef Name="Active_Ind" />
+          </Key>
+          <Property Name="Employee_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Room" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Warden_Ind" Type="Int32" Nullable="false" />
+          <Property Name="Active_Ind" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Event_Type">
+          <Key>
+            <PropertyRef Name="Event_Type_Id" />
+            <PropertyRef Name="Emergency_Type" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Active_Ind" />
+          </Key>
+          <Property Name="Event_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emergency_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Ruby_EmergencyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ref_Employee_Status" EntityType="Self.Ref_Employee_Status" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Ref_Event_Type" EntityType="Self.Ref_Event_Type" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ruby_EmergencyModelStoreContainer" CdmEntityContainer="Ruby_EmergencyEntities">
+          <EntitySetMapping Name="Ref_Employee_Status">
+            <EntityTypeMapping TypeName="Ruby_EmergencyModel.Ref_Employee_Status">
+              <MappingFragment StoreEntitySet="Ref_Employee_Status">
+                <ScalarProperty Name="Employee_Status_Id" ColumnName="Employee_Status_Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Ruby_EmergencyModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Warden_Ind" ColumnName="Warden_Ind" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Event_Type">
+            <EntityTypeMapping TypeName="Ruby_EmergencyModel.Ref_Event_Type">
+              <MappingFragment StoreEntitySet="Ref_Event_Type">
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Emergency_Type" ColumnName="Emergency_Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

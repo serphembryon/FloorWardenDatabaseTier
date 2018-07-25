@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FloorWardenDatabaseTier.Models;
 
 namespace FloorWardenDatabaseTier.Controllers
 {
@@ -13,9 +14,25 @@ namespace FloorWardenDatabaseTier.Controllers
     {
         // GET: api/Employees
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult Get()
         {
-            return new string[] { "value1", "value2" };
+            List<JSONEmployee> result = new List<JSONEmployee>();
+            using (var context = new Ruby_EmergencyContext())
+            {
+                foreach (Employee person in context.Employee)
+                {
+                    JSONEmployee newEmployee = new JSONEmployee();
+                    newEmployee.fname = person.Fname;
+                    newEmployee.lname = person.Lname;
+                    newEmployee.email = person.Email;
+                    newEmployee.building = person.Building;
+                    newEmployee.floor = person.Floor;
+                    newEmployee.room = person.Room;
+                    newEmployee.phone = person.Phone;
+                    result.Add(newEmployee);
+                }
+            }
+            return Json(result);
         }
 
         // GET: api/Employees/5
@@ -27,18 +44,34 @@ namespace FloorWardenDatabaseTier.Controllers
         
         // POST: api/Employees
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Add(JSONEmployee postedEmployee)
         {
+            using (var context = new Ruby_EmergencyContext())
+            {
+                Employee newEmployee = new Employee();
+                newEmployee.Fname = postedEmployee.fname;
+                newEmployee.Lname = postedEmployee.lname;
+                newEmployee.Email = postedEmployee.email;
+                newEmployee.Building = postedEmployee.building;
+                newEmployee.Floor = postedEmployee.floor;
+                newEmployee.Room = postedEmployee.room;
+                newEmployee.Phone = postedEmployee.phone;
+                //status
+                //warden?
+
+                context.Add(newEmployee);
+                context.SaveChangesAsync();
+            }
         }
-        
+
         // PUT: api/Employees/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPost]
+        public void Update(int id, [FromBody]string value)
         {
         }
-        
+
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpPost]
         public void Delete(int id)
         {
         }
